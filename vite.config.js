@@ -1,10 +1,8 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  // GitHub Pages のリポジトリ名に合わせてベースパスを設定
-  // 例: https://username.github.io/Grouping/ の場合は '/Grouping/'
-  // ローカル開発時は '/' のままで問題なし
-  base: './',
+  // GitHub Pages: https://Mashi0921.github.io/Grouping/
+  base: '/Grouping/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
