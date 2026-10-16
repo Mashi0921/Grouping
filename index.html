@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="学級グループ分けWebアプリ — 総人数とグループ数を入力してランダムにグループ分けします。" />
+  <title>グループ分けくん</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='28'>🎲</text></svg>" />
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+  <div class="app">
+
+    <!-- ── ヘッダー ─────────────────────────────────────── -->
+    <header class="app-header">
+      <h1 class="app-title">
+        <span class="app-title__icon" aria-hidden="true">🎲</span>
+        グループ分けくん
+      </h1>
+      <p class="app-subtitle">クラスをランダムにグループ分けしよう！</p>
+    </header>
+
+    <!-- ── 入力フォーム ───────────────────────────────────── -->
+    <main class="app-main">
+      <section class="input-section" aria-label="グループ分け設定">
+        <form id="input-form" class="input-form" novalidate>
+          <div class="input-row">
+            <div class="input-group">
+              <label class="input-label" for="input-total">
+                総人数
+                <span class="input-label__hint">（1〜200）</span>
+              </label>
+              <input
+                class="input-field"
+                type="number"
+                id="input-total"
+                name="total"
+                min="1"
+                max="200"
+                step="1"
+                placeholder="例: 32"
+                inputmode="numeric"
+                aria-describedby="error-message"
+                required
+              />
+            </div>
+
+            <div class="input-group">
+              <label class="input-label" for="input-groups">
+                グループ数
+                <span class="input-label__hint">（1〜総人数）</span>
+              </label>
+              <input
+                class="input-field"
+                type="number"
+                id="input-groups"
+                name="groups"
+                min="1"
+                step="1"
+                placeholder="例: 5"
+                inputmode="numeric"
+                aria-describedby="error-message"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- エラーメッセージ -->
+          <p
+            id="error-message"
+            class="error-message"
+            role="alert"
+            aria-live="polite"
+            hidden
+          ></p>
+
+          <div class="btn-row">
+            <button
+              id="btn-start"
+              type="submit"
+              class="btn btn--primary btn--large"
+              aria-busy="false"
+            >
+              🎲 スタート
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ── Canvas アニメーションエリア ─────────────────── -->
+      <section
+        id="canvas-section"
+        class="canvas-section"
+        aria-label="グループ分けアニメーション"
+        hidden
+      >
+        <div class="canvas-toolbar">
+          <span class="canvas-toolbar__label">表示操作</span>
+          <button id="btn-zoom-in"     class="btn btn--tool" aria-label="ズームイン"  title="ズームイン (+)" hidden>＋</button>
+          <button id="btn-zoom-out"    class="btn btn--tool" aria-label="ズームアウト" title="ズームアウト (−)" hidden>－</button>
+          <button id="btn-reset-view"  class="btn btn--tool" aria-label="表示リセット" title="表示をリセット (0)" hidden>⟳ リセット</button>
+        </div>
+
+        <div class="canvas-wrapper" role="img" aria-label="ボールのアニメーション">
+          <canvas id="anim-canvas" class="anim-canvas"></canvas>
+        </div>
+
+        <p class="canvas-hint">
+          マウスホイール・ピンチでズーム ／ ドラッグ・スワイプで移動
+        </p>
+      </section>
+
+      <!-- ── 再抽選ボタン ──────────────────────────────────── -->
+      <div class="retry-row">
+        <button
+          id="btn-retry"
+          type="button"
+          class="btn btn--secondary btn--large"
+          hidden
+        >
+          🔄 もう一度分ける
+        </button>
+      </div>
+
+      <!-- ── 結果表示 ────────────────────────────────────── -->
+      <section
+        id="result-section"
+        class="result-section"
+        aria-label="グループ分け結果"
+        hidden
+      >
+        <h2 class="result-section__title">グループ分け結果</h2>
+        <div id="result-list" class="result-list" role="list"></div>
+      </section>
+    </main>
+
+    <!-- ── フッター ──────────────────────────────────────── -->
+    <footer class="app-footer">
+      <p>個人情報は扱いません。リロードするとデータは消えます。</p>
+    </footer>
+
+  </div>
+</body>
+</html>

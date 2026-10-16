@@ -1,0 +1,450 @@
+/* ================================================================
+   グループ分けくん — スタイルシート
+   レスポンシブ対応: Windows/Mac Chrome・iPad Chrome
+   ================================================================ */
+
+/* ── CSS カスタムプロパティ ──────────────────────────────────── */
+:root {
+  --color-primary:       #4A90D9;
+  --color-primary-dark:  #2C6FAC;
+  --color-primary-light: #EBF4FF;
+  --color-secondary:     #F5A623;
+  --color-secondary-dark:#C47D00;
+  --color-bg:            #F0F6FF;
+  --color-surface:       #FFFFFF;
+  --color-border:        #C8DDF5;
+  --color-text:          #1A2B3C;
+  --color-text-sub:      #5A7090;
+  --color-error:         #D0021B;
+  --color-error-bg:      #FFF0F0;
+
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+
+  --shadow-card:   0 2px 12px rgba(74, 144, 217, 0.15);
+  --shadow-btn:    0 3px 8px rgba(74, 144, 217, 0.30);
+
+  --font-sans: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Noto Sans JP', Meiryo, sans-serif;
+
+  --transition: 0.2s ease;
+}
+
+/* ── リセット・ベース ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100dvh;
+  line-height: 1.6;
+}
+
+/* ── アプリコンテナ ──────────────────────────────────────────── */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ── ヘッダー ──────────────────────────────────────────────── */
+.app-header {
+  text-align: center;
+  padding: 32px 0 20px;
+}
+
+.app-title {
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  font-weight: 900;
+  color: var(--color-primary-dark);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.app-title__icon {
+  display: inline-block;
+  margin-right: 0.3em;
+}
+
+.app-subtitle {
+  margin-top: 6px;
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
+  color: var(--color-text-sub);
+}
+
+/* ── メインコンテンツ ─────────────────────────────────────────── */
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 40px;
+}
+
+/* ── 入力フォーム ──────────────────────────────────────────── */
+.input-section {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: clamp(20px, 4vw, 40px);
+}
+
+.input-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.input-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.input-group {
+  flex: 1 1 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.input-label__hint {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--color-text-sub);
+  margin-left: 4px;
+}
+
+.input-field {
+  height: 52px;
+  padding: 0 16px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 1.25rem;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: var(--color-surface);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  -moz-appearance: textfield;
+  appearance: textfield;
+  width: 100%;
+}
+
+.input-field::-webkit-inner-spin-button,
+.input-field::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(74,144,217,0.25);
+}
+
+/* ── エラーメッセージ ─────────────────────────────────────────── */
+.error-message {
+  color: var(--color-error);
+  background: var(--color-error-bg);
+  border: 1.5px solid var(--color-error);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* ── ボタン共通 ──────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition),
+              box-shadow var(--transition), opacity var(--transition);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.btn:active:not(:disabled) { transform: translateY(1px); }
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* プライマリ */
+.btn--primary {
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: var(--shadow-btn);
+}
+.btn--primary:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+  box-shadow: 0 5px 14px rgba(74,144,217,0.40);
+}
+
+/* セカンダリ */
+.btn--secondary {
+  background: var(--color-secondary);
+  color: #fff;
+  box-shadow: 0 3px 8px rgba(245,166,35,0.35);
+}
+.btn--secondary:hover:not(:disabled) {
+  background: var(--color-secondary-dark);
+}
+
+/* ツールボタン */
+.btn--tool {
+  background: var(--color-surface);
+  color: var(--color-primary-dark);
+  border: 1.5px solid var(--color-border);
+  padding: 6px 14px;
+  font-size: 0.88rem;
+  border-radius: var(--radius-sm);
+}
+.btn--tool:hover:not(:disabled) {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+
+/* 大きいボタン */
+.btn--large {
+  padding: 14px 36px;
+  font-size: clamp(1rem, 3vw, 1.15rem);
+  min-width: 180px;
+}
+
+/* ── ボタン行 ──────────────────────────────────────────────── */
+.btn-row {
+  display: flex;
+  justify-content: center;
+}
+
+.retry-row {
+  display: flex;
+  justify-content: center;
+}
+
+/* ── Canvas セクション ─────────────────────────────────────── */
+.canvas-section {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.canvas-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--color-primary-light);
+  border-bottom: 1.5px solid var(--color-border);
+  flex-wrap: wrap;
+}
+
+.canvas-toolbar__label {
+  font-size: 0.8rem;
+  color: var(--color-text-sub);
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.canvas-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 280px;
+  max-height: 60vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, #EBF4FF 0%, #F8F0FF 100%);
+  touch-action: none; /* ピンチ操作のため */
+}
+
+.anim-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.canvas-hint {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--color-text-sub);
+  padding: 8px 12px;
+  background: var(--color-bg);
+}
+
+/* ── 結果セクション ─────────────────────────────────────────── */
+.result-section {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: clamp(20px, 4vw, 36px);
+}
+
+.result-section__title {
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  font-weight: 900;
+  color: var(--color-primary-dark);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* ── 結果リスト（グリッド） ─────────────────────────────────── */
+.result-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
+  gap: 16px;
+}
+
+/* ── 結果カード ──────────────────────────────────────────────── */
+.result-card {
+  background: var(--group-light, #F5F5F5);
+  border: 2.5px solid var(--group-bg, #888);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform var(--transition);
+}
+
+.result-card:hover { transform: translateY(-2px); }
+
+.result-card__title {
+  background: var(--group-bg, #888);
+  color: var(--group-text, #fff);
+  padding: 10px 14px;
+  font-size: 1rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.result-card__count {
+  font-size: 0.82rem;
+  font-weight: 600;
+  opacity: 0.9;
+  background: rgba(255,255,255,0.25);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.result-card__members {
+  list-style: none;
+  padding: 12px 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.result-card__member {
+  background: var(--group-bg, #888);
+  color: var(--group-text, #fff);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ── フッター ──────────────────────────────────────────────── */
+.app-footer {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.78rem;
+  color: var(--color-text-sub);
+  border-top: 1px solid var(--color-border);
+}
+
+/* ── レスポンシブ：スマホ・小画面 ──────────────────────────── */
+@media (max-width: 480px) {
+  .input-row {
+    flex-direction: column;
+  }
+
+  .canvas-wrapper {
+    aspect-ratio: 4 / 3;
+    min-height: 240px;
+  }
+
+  .btn--large {
+    width: 100%;
+  }
+
+  .retry-row .btn--large {
+    width: 100%;
+  }
+}
+
+/* ── レスポンシブ：タブレット ───────────────────────────────── */
+@media (min-width: 768px) {
+  .canvas-wrapper {
+    max-height: 55vh;
+  }
+
+  .result-list {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
+
+/* ── 高コントラスト対応 ──────────────────────────────────────── */
+@media (forced-colors: active) {
+  .btn { border: 2px solid ButtonText; }
+  .result-card { border: 2px solid CanvasText; }
+  .input-field { border: 2px solid ButtonText; }
+}
+
+/* ── モーション削減 ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+/* ── アニメーション：結果カード出現 ─────────────────────────── */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.result-card {
+  animation: fadeSlideUp 0.35s ease both;
+}
+
+/* カード表示遅延（最初の10枚まで） */
+.result-card:nth-child(1)  { animation-delay: 0.05s; }
+.result-card:nth-child(2)  { animation-delay: 0.10s; }
+.result-card:nth-child(3)  { animation-delay: 0.15s; }
+.result-card:nth-child(4)  { animation-delay: 0.20s; }
+.result-card:nth-child(5)  { animation-delay: 0.25s; }
+.result-card:nth-child(6)  { animation-delay: 0.30s; }
+.result-card:nth-child(7)  { animation-delay: 0.35s; }
+.result-card:nth-child(8)  { animation-delay: 0.40s; }
+.result-card:nth-child(9)  { animation-delay: 0.45s; }
+.result-card:nth-child(10) { animation-delay: 0.50s; }
